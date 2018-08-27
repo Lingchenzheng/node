@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--<form action="http://localhost:3000/upload/single" method="post" enctype="multipart/form-data">-->
+			<input type="file" name="logo" id="file"/>
+			<!--<input type="submit" value="提交"/>-->
+			<button type="button" id="btn">提交</button>
+		<!--</form>-->			
+		用户名：<input type="text" id="un"/><br />
+		年龄：<input type="number" id="age"/><br />
+		<button id="sub">注册</button>
+		<script src="jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="socket.io.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var url = 'http://localhost:3000';
+			
+			
+			document.getElementById("sub").addEventListener('click',function() {
+				$.ajax({
+				        type:"post",
+				        url:url+"/register",
+				        async:true,
+				         dataType:"json",
+				        data:{
+				            username: $('#un').val(),
+				            age: parseInt($('#age').val())
+				        },
+				        success:function(data){
+				            console.log(JSON.stringify(data))
+				        },
+				        error:function(error){
+				            
+				        }
+				    }); 
+			})
+			
+			document.getElementById("file").addEventListener('change',function() {
+				var fd = new FormData()
+				for(let i=0; i < this.files.length; i++) {
+					fd.append('logo',this.files[i])
+				}
+				fd.append('age',25)
+				document.getElementById("btn").addEventListener('click',function() {
+					$.ajax({
+					        type:"post",
+					        url:url+"/upload/single",
+					        async:true,
+					        contentType: false,
+					        data:fd,
+					        processData:false,
+					        success:function(data){
+					            console.log(data)
+					        },
+					        error:function(error){
+					            
+					        }
+					    }); 
+				})
+			})
+			
+		</script>
+	</body>
+</html>

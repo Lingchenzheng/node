@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="cropper.min.css"/>
+		<style type="text/css">
+			.container {
+				width: 100%;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="container">
+			<img src="uploads/images/1287fc2f841b3d1ac1823e6a0aa5d03f.jpg"/>
+		</div>
+		
+		<script src="jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="cropper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('.container > img').cropper({
+			    aspectRatio: 2/2,
+			    dragMode  :'move',
+			    cropBoxResizable:false,
+			    autoCropArea:0.5,
+			    cropBoxMovable :true,
+			    autoCrop:true,
+			    background:true,
+			    modal:true,
+			    guides:true,
+			    highlight:false,
+			    zoomOnWheel:true,
+			    zoomOnTouch:false,
+			    movable:true,
+			    resizable:true,
+			    crop: function(data) {
+//					console.log(data)
+					console.log($('.container > img').cropper("getCroppedCanvas"))
+			    }
+			});
+			
+			
+		</script>
+	</body>
+</html>
